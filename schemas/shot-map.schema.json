@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Storyboard Video Director Shot Map",
+  "type": "object",
+  "required": ["project_brief", "shot_map"],
+  "properties": {
+    "project_brief": {
+      "type": "object",
+      "required": ["title", "output_mode"],
+      "properties": {
+        "title": {"type": "string"},
+        "user_goal": {"type": "string"},
+        "output_mode": {"type": "string"},
+        "primary_medium": {"type": "string"},
+        "target_model": {"type": "string"},
+        "use_case": {"type": "string"},
+        "aspect_ratio": {"type": "string"}
+      }
+    },
+    "story_visual_brief": {"type": "object"},
+    "beats": {"type": "array", "items": {"type": "object"}},
+    "shot_map": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["shot", "frame_description"],
+        "properties": {
+          "shot": {"type": "integer", "minimum": 1},
+          "time": {"type": "string"},
+          "panel_title": {"type": "string"},
+          "frame_description": {"type": "string"},
+          "camera": {"type": "object"},
+          "action": {"type": "object"},
+          "audio": {"type": "object"},
+          "design_notes": {"type": "object"}
+        }
+      }
+    }
+  }
+}
