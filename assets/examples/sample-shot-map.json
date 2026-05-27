@@ -1,0 +1,50 @@
+{
+  "project_brief": {
+    "title": "Tiny fixer dismantles a giant robot",
+    "user_goal": "Generate a storyboard and video prompt",
+    "output_mode": "complete_package",
+    "primary_medium": "both",
+    "target_model": "generic_video",
+    "use_case": "short_film",
+    "aspect_ratio": "16:9"
+  },
+  "story_visual_brief": {
+    "logline": "A tiny fixer survives a giant robot by dismantling it one visible bolt at a time.",
+    "scene_world": "Dusty industrial yard",
+    "style_language": "stylized cinematic painterly 3D-anime hybrid",
+    "color_logic": "muted amber and blue"
+  },
+  "beats": [
+    {"id": "beat_1", "name": "发现与逼近", "shots": [1, 2]},
+    {"id": "beat_2", "name": "脚踝破坏", "shots": [3]}
+  ],
+  "shot_map": [
+    {
+      "shot": 1,
+      "time": "0-2s",
+      "panel_title": "发现",
+      "frame_description": "Koda hides behind a crate while the giant robot patrols the industrial yard.",
+      "camera": {"shot_size": "extreme_wide", "angle": "low_angle", "movement": "locked", "lens_feel": "28mm"},
+      "action": {"subject_action": "Koda hides; robot patrols", "cause": "Robot senses motion", "effect": "Robot turns toward crate"},
+      "audio": {"sfx": "low servo hum"}
+    },
+    {
+      "shot": 2,
+      "time": "2-4s",
+      "panel_title": "滑入脚踝",
+      "frame_description": "Koda slides under the robot hand toward the right ankle with the red screwdriver visible.",
+      "camera": {"shot_size": "wide", "angle": "ground_height", "movement": "side_track", "lens_feel": "24mm"},
+      "action": {"subject_action": "Koda slides toward ankle", "cause": "Robot reaches down", "effect": "Koda reaches the exposed screw"},
+      "audio": {"sfx": "dust scrape"}
+    },
+    {
+      "shot": 3,
+      "time": "4-6s",
+      "panel_title": "螺丝松动",
+      "frame_description": "Macro insert: the red screwdriver bites into the ankle screw, twists it loose, and the screw drops.",
+      "camera": {"shot_size": "macro", "angle": "locked", "movement": "staccato_inserts", "lens_feel": "macro"},
+      "action": {"subject_action": "Koda twists screw loose", "cause": "Screw is visibly loosened", "effect": "Robot ankle begins to fail"},
+      "audio": {"sfx": "metal clicks and screw bounce"}
+    }
+  ]
+}
