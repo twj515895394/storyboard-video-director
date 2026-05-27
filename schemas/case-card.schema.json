@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Storyboard Video Director Case Card",
+  "type": "object",
+  "required": ["case_name", "mode", "template_family"],
+  "properties": {
+    "case_name": {"type": "string"},
+    "mode": {"type": "string"},
+    "template_family": {"type": "string"},
+    "source_type": {"type": "string"},
+    "use_cases": {"type": "array", "items": {"type": "string"}},
+    "layout_structure": {"type": "string"},
+    "shot_or_panel_count": {"type": "string"},
+    "beat_structure": {"type": "array", "items": {"type": "string"}},
+    "visual_style": {"type": "string"},
+    "camera_language": {"type": "string"},
+    "audio_design": {"type": "string"},
+    "action_causality": {"type": "string"},
+    "reference_asset_strategy": {"type": "string"},
+    "reusable_modules": {"type": "array", "items": {"type": "string"}},
+    "variant_ideas": {"type": "array", "items": {"type": "string"}}
+  }
+}
