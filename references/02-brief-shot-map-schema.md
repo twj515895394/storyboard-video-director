@@ -13,11 +13,31 @@ project_brief:
   target_model: gpt-image2 | seedance | generic_video | unspecified
   audience: ""
   use_case: short_film | ad | vlog | training | product_demo | mood_film | other
-  aspect_ratio: "16:9"
+  aspect_ratio: "9:16 | 16:9 | 1:1 | 4:5 | custom"
+  orientation: vertical | horizontal | square | custom
+  target_platform: douyin | xiaohongshu | youtube | presentation | generic | unspecified
+  aspect_ratio_policy: required_for_video
+  timeline_policy: required_for_direct_video | ask_for_storyboard_based_video | optional | disabled
   language_policy:
     explanation: zh
     storyboard_labels: zh
     final_prompts: zh_en
+```
+
+## Video aspect ratio rule
+
+Aspect ratio is required for video prompt generation.
+
+- Direct video prompt generation: include aspect ratio in `project_brief` and final prompt.
+- Complete package with video prompt: include aspect ratio in the video section.
+- Storyboard image to video prompt: ask whether to inherit the storyboard aspect ratio or choose a new video ratio.
+- If user does not specify and asks for immediate generation, choose a context-aware default and state it explicitly.
+
+Recommended default question:
+
+```text
+这个视频主要用于哪里？A 竖屏 9:16（抖音/小红书/Seedance常用，默认推荐） B 横屏 16:9（电影感/YouTube/PPT） C 方形 1:1 D 自定义比例。
+我的推荐：短视频平台优先 9:16；电影感环境展示优先 16:9。
 ```
 
 ## Layer 2: Story / Visual Brief
@@ -55,7 +75,33 @@ beats:
     shots: [1, 2, 3]
 ```
 
-## Layer 4: Shot Map
+## Layer 4: Timeline / Beat Map
+
+Use this layer for video prompt generation.
+
+Rules:
+
+- Direct video prompt generation without a storyboard image: timeline is required.
+- Complete package including video prompt: timeline is required in the video section.
+- Video prompt from an existing storyboard image: ask the user whether to add timeline unless they already specify it.
+- If the user declines timeline for storyboard-based conversion, preserve panel order and continuity without explicit timestamps.
+
+```yaml
+timeline_beat_map:
+  required: true
+  source: direct_video_prompt | storyboard_image_conversion | complete_package
+  total_duration: "8s"
+  beat_style: one_take_internal_beats | edited_shot_timeline | multi_clip_timeline
+  beats:
+    - time: "0.0-1.0s"
+      visual_action: ""
+      camera_motion: ""
+      scene_route_state: ""
+      continuity: ""
+      audio_cue: ""
+```
+
+## Layer 5: Shot Map
 
 ```yaml
 shot_map:
@@ -105,6 +151,13 @@ storyboard_image_extension:
 ```yaml
 video_prompt_extension:
   duration: ""
+  aspect_ratio: "9:16 | 16:9 | 1:1 | 4:5 | custom"
+  orientation: vertical | horizontal | square | custom
+  target_platform: ""
+  aspect_ratio_required: true
+  shot_strategy: one_take | multi_shot | montage | loop | clip_series
+  timeline_required: true
+  timeline_question_required: false
   shot_count: ""
   shot_density: low | medium | high
   multi_clip: false
