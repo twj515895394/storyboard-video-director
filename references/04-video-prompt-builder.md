@@ -27,9 +27,9 @@ A strong video prompt must specify:
 2. Subjects: characters/products/objects and reference asset binding.
 3. Scene: environment, geography, route, spatial logic.
 4. Action Logic: cause-effect chain and visible triggers.
-5. Shot Sequence: ordered shots with camera language.
+5. Shot Strategy: one-take, multi-shot, montage, loop, clip-series.
 6. Camera Language: shot size, angle, movement, lens feel.
-7. Motion Blocking: subject movement path, camera path, start/end position, speed changes.
+7. Motion Grammar: pace profile, subject route, camera relationship, transition logic.
 8. Audio Design: SFX/dialogue/voiceover/BGM as needed.
 9. Mood: emotional movement.
 10. Color Logic: palette and lighting transition.
@@ -65,13 +65,25 @@ Recommended default question:
 
 If immediate generation is required and aspect ratio is missing, choose a context-aware default and state it before the prompt.
 
-## One-take detection rule
+## Motion grammar rule
 
-If the user says 一镜到底, one take, continuous shot, long take, tracking shot, 跟拍, or no cut, immediately load `references/10-one-take-video-controller.md`.
+Always use `references/10-video-motion-grammar.md` when the prompt involves movement, pacing, tracking, one-take, fast/slow rhythm, route changes, scene transitions, chase, sports, dance, product operation, or camera choreography.
 
-For one-take requests, do not output a multi-shot list unless the user asks for a storyboard. Use an internal time-beat map, then produce one continuous prompt.
+Do not create separate controllers for every named style. Treat one-take, slow-burn, fast kinetic, handheld, drone reveal, tracking, product demo, and montage as combinations of motion grammar parameters:
 
-Important: one-take does not mean slow or static. It can be fast-paced through speed changes, route changes, foreground occlusions, camera height changes, background transitions, and staged action beats inside one uninterrupted shot.
+```text
+Shot Strategy + Pace Profile + Camera Relationship + Route / Scene Progression + Subject Motion + Transition Logic + Audio Rhythm + Continuity Constraints
+```
+
+## One-take handling inside motion grammar
+
+If the user says 一镜到底, one take, continuous shot, long take, tracking shot, 跟拍, or no cut:
+
+- Use `shot_strategy: one_take`.
+- Use internal timed beats, not an edited multi-shot list.
+- Make pace explicit: slow_burn, medium_flow, fast_kinetic, staccato, or crescendo.
+- One-take can be fast-paced. Build speed through subject acceleration, route changes, foreground wipes, camera height changes, turns, background zone changes, and audio rhythm.
+- The final prompt must say: one continuous shot, no cuts, no montage, no jump cuts.
 
 ## Video prompt output structure
 
@@ -82,7 +94,7 @@ FORMAT:
 SUBJECTS:
 REFERENCE ASSET BINDING:
 SCENE & ROUTE:
-CAMERA PLAN:
+CAMERA / MOTION GRAMMAR:
 ACTION / MOTION BEATS:
 AUDIO DESIGN:
 MOOD:
@@ -96,9 +108,9 @@ For one-take prompts, prefer:
 
 ```text
 FORMAT:
-ONE-TAKE CAMERA PLAN:
 SUBJECT:
 SCENE & ROUTE:
+CAMERA / MOTION GRAMMAR:
 CONTINUOUS ACTION BEATS:
 AUDIO DESIGN:
 STYLE / LIGHTING / COLOR:
@@ -131,7 +143,7 @@ Before finalizing, check that the final prompt includes:
 - clothing/props/reference assets;
 - duration and aspect ratio/orientation;
 - scene and route;
-- camera plan;
+- camera / motion grammar;
 - timed action beats;
 - lighting and color logic;
 - audio priorities;
