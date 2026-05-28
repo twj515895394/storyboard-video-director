@@ -30,11 +30,55 @@ A strong video prompt must specify:
 5. Shot Strategy: one-take, multi-shot, montage, loop, clip-series.
 6. Camera Language: shot size, angle, movement, lens feel.
 7. Motion Grammar: pace profile, subject route, camera relationship, transition logic.
-8. Audio Design: SFX/dialogue/voiceover/BGM as needed.
-9. Mood: emotional movement.
-10. Color Logic: palette and lighting transition.
-11. Style: medium, realism level, texture, rendering language.
-12. Constraints: identity, physics, continuity, and what not to show.
+8. Timeline / Beat Map: timed action beats used to assemble the final prompt.
+9. Audio Design: SFX/dialogue/voiceover/BGM as needed.
+10. Mood: emotional movement.
+11. Color Logic: palette and lighting transition.
+12. Style: medium, realism level, texture, rendering language.
+13. Constraints: identity, physics, continuity, and what not to show.
+
+## Timeline policy
+
+Timeline is a required planning layer for direct video prompt generation.
+
+### Case A: user directly asks for a video prompt
+
+If the user asks directly for 视频 Prompt / Seedance Prompt / AI 视频提示词 and there is no storyboard image as the source, always output a visible timeline section before the final prompt.
+
+Use one of these names:
+
+```text
+时间轴设计
+Time Beat Map
+Timeline / Beat Map
+Continuous Action Beats
+Shot Timeline
+```
+
+The final copyable prompt must also include the timeline information, not just the planning section.
+
+Minimum timeline fields:
+
+```text
+time range → visual/action beat → camera/motion behavior → scene/route state → audio cue when useful
+```
+
+### Case B: user asks to generate video prompt based on storyboard image
+
+If the user provides or references a storyboard image / storyboard sheet / 分镜图 and asks to convert it into a video prompt, ask whether to add a timeline before finalizing unless the user already specified it.
+
+Recommended question:
+
+```text
+要不要在视频 Prompt 里加入明确时间轴？A 加入，按每个分镜/动作拆成时间段（推荐） B 不加入，只保留连续视频描述 C 你指定时间分配。
+我的推荐：如果要投喂 Seedance / AI 视频模型，建议加入时间轴，这样镜头节奏和动作更稳。
+```
+
+If the user says yes, convert storyboard panels into timed beats. If the user says no, still preserve panel order and continuity, but do not force explicit timestamps.
+
+### Case C: complete package
+
+If output includes both storyboard design and video prompt, include a timeline in the video section by default, because the Shot Map already contains timing information.
 
 ## Duration and shot density planner
 
@@ -95,7 +139,7 @@ SUBJECTS:
 REFERENCE ASSET BINDING:
 SCENE & ROUTE:
 CAMERA / MOTION GRAMMAR:
-ACTION / MOTION BEATS:
+TIMELINE / BEAT MAP:
 AUDIO DESIGN:
 MOOD:
 COLOR LOGIC:
@@ -111,7 +155,7 @@ FORMAT:
 SUBJECT:
 SCENE & ROUTE:
 CAMERA / MOTION GRAMMAR:
-CONTINUOUS ACTION BEATS:
+CONTINUOUS ACTION BEATS / TIME BEAT MAP:
 AUDIO DESIGN:
 STYLE / LIGHTING / COLOR:
 NEGATIVE CONSTRAINTS:
@@ -144,12 +188,12 @@ Before finalizing, check that the final prompt includes:
 - duration and aspect ratio/orientation;
 - scene and route;
 - camera / motion grammar;
-- timed action beats;
+- timed action beats or explicit timeline when required;
 - lighting and color logic;
 - audio priorities;
 - negative constraints.
 
-If any of these exist in the Visual Brief or Shot Map but not in the final prompt, revise the prompt before output.
+If any of these exist in the Visual Brief, Shot Map, Timeline / Beat Map, or storyboard analysis but not in the final prompt, revise the prompt before output.
 
 ## Reference asset binding
 
@@ -169,8 +213,9 @@ Subtitles, captions, and screen text are disabled by default. Add only when the 
 ## Final output pattern
 
 1. 中文视频方案说明, concise.
-2. 中文视频 Prompt, copyable.
-3. English Video Prompt, copyable when useful.
-4. Optional model notes or feasibility notes.
+2. 时间轴设计 / Timeline Beat Map, required for direct video prompt generation.
+3. 中文视频 Prompt, copyable.
+4. English Video Prompt, copyable when useful.
+5. Optional model notes or feasibility notes.
 
-If the user asks for direct generation and the brief is sufficient, keep the design explanation short and prioritize the final copyable prompt.
+If the user asks for direct generation and the brief is sufficient, keep the design explanation short and prioritize the timeline plus final copyable prompt.
