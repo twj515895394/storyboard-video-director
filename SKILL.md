@@ -16,6 +16,7 @@ Use this skill as an AI video pre-production director. Start from a short theme,
 5. Convert the same Shot Map into different outputs instead of inventing unrelated prompts for image and video.
 6. Prefer executable prompts over decorative prose. Every shot/panel must serve story, action, emotion, information, or visual payoff.
 7. For video, do not force subtitles/screen text in V1. Only include subtitles or text overlays when the user explicitly asks.
+8. For video motion, do not add ad-hoc controllers for every style. Use the generic video motion grammar and combine its dimensions.
 
 ## Mode router
 
@@ -41,6 +42,7 @@ Read only the needed references:
 - `references/07-multi-clip-controller.md` — splitting complex videos into clips.
 - `references/08-case-ingestion-template-library.md` — ingesting examples into reusable assets.
 - `references/09-quality-checklist.md` — final self-check and automatic simplification.
+- `references/10-video-motion-grammar.md` — generic motion and pacing grammar for one-take, fast/slow rhythm, tracking, montage, route changes, and camera choreography.
 
 ## Default output policy
 
@@ -61,6 +63,7 @@ Use Chinese for design explanations. Provide Chinese and English final prompts w
 - Storyboard image default: 16:9 wide cinematic storyboard sheet.
 - Storyboard panel count: dynamic, usually 4–8, complex up to 16.
 - Video prompt format: adaptive dimensions, not a rigid Seedance template.
+- Video motion format: generic motion grammar, not separate controllers for every style.
 - Audio: adaptive; do not force dialogue, voiceover, or BGM.
 - Subtitles/screen text in video: off by default unless explicitly requested.
 - Case library: optional enhancer, never a blocker.
