@@ -13,7 +13,7 @@ project_brief:
   target_model: gpt-image2 | seedance | generic_video | unspecified
   audience: ""
   use_case: short_film | ad | vlog | training | product_demo | mood_film | other
-  aspect_ratio: "9:16 | 16:9 | 1:1 | 4:5 | custom"
+  aspect_ratio: "9:16 | 16:9 | 1:1 | 4:3 | 3:4 | custom"
   orientation: vertical | horizontal | square | custom
   target_platform: douyin | xiaohongshu | youtube | presentation | generic | unspecified
   aspect_ratio_policy: required_for_video
@@ -28,6 +28,19 @@ project_brief:
 
 Aspect ratio is required for video prompt generation.
 
+Common base options:
+
+| Ratio | Orientation | Typical use |
+|---|---|---|
+| 9:16 | vertical | short video platforms, mobile-first AI video |
+| 16:9 | horizontal | cinematic, YouTube, presentation, landscape scenes |
+| 1:1 | square | square social feed, neutral framing |
+| 4:3 | horizontal classic | retro video, documentary, older TV/camera feel, stable composition |
+| 3:4 | vertical classic | portrait-oriented classic framing, character-focused composition |
+| custom | custom | model/platform-specific requirement |
+
+Note: 4:5 can be used as a platform-specific social feed ratio when explicitly requested, but it is not a base ratio option for this Skill.
+
 - Direct video prompt generation: include aspect ratio in `project_brief` and final prompt.
 - Complete package with video prompt: include aspect ratio in the video section.
 - Storyboard image to video prompt: ask whether to inherit the storyboard aspect ratio or choose a new video ratio.
@@ -36,8 +49,8 @@ Aspect ratio is required for video prompt generation.
 Recommended default question:
 
 ```text
-这个视频主要用于哪里？A 竖屏 9:16（抖音/小红书/Seedance常用，默认推荐） B 横屏 16:9（电影感/YouTube/PPT） C 方形 1:1 D 自定义比例。
-我的推荐：短视频平台优先 9:16；电影感环境展示优先 16:9。
+这个视频主要用于哪里？A 竖屏 9:16（抖音/小红书/Seedance常用，默认推荐） B 横屏 16:9（电影感/YouTube/PPT） C 方形 1:1 D 横屏经典 4:3 E 竖屏经典 3:4 F 自定义比例。
+我的推荐：短视频平台优先 9:16；电影感环境展示优先 16:9；复古/纪录片感可选 4:3；人物竖构图可选 3:4。
 ```
 
 ## Layer 2: Story / Visual Brief
@@ -151,7 +164,7 @@ storyboard_image_extension:
 ```yaml
 video_prompt_extension:
   duration: ""
-  aspect_ratio: "9:16 | 16:9 | 1:1 | 4:5 | custom"
+  aspect_ratio: "9:16 | 16:9 | 1:1 | 4:3 | 3:4 | custom"
   orientation: vertical | horizontal | square | custom
   target_platform: ""
   aspect_ratio_required: true
